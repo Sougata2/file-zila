@@ -1,10 +1,10 @@
-import {configureStore} from "@reduxjs/toolkit";
-import fileReducer from "./fileSlice.js"
+import { configureStore } from "@reduxjs/toolkit";
+import fileReducer from "./fileSlice.js";
 
 const store = configureStore({
-    reducer:{
-        file: fileReducer,
-    }
-})
+  reducer: {
+    file: fileReducer,
+  },
+});
 
 export default store;

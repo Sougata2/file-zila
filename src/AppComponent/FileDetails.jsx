@@ -1,21 +1,16 @@
-function FileDetails({name, ext}) {
-    return (
-        <div className={"flex flex-col gap-3"}>
-            <div><Detail label={"File"} value={name}/></div>
-            <div className={"text-xs  text-slate-400 text-shadow-amber-400"}><Detail label={"Ext"}
-                                                                                     value={ext}/></div>
-        </div>
-    );
-}
+import FileIcons from "./FileIcons";
 
-function Detail({label, value}) {
-    return (
-        <div className={"flex gap-2"}>
-            <span className={"text-slate-500"}>{label}</span>
-            <span className={"text-slate-400"}>:</span>
-            <span className={"truncate max-w-full"}>{value}</span>
-        </div>
-    );
+function FileDetails({ name, ext }) {
+  return (
+    <div className={"flex flex-col gap-3"}>
+      <div className="truncate max-w-full text-left">
+        <span>{name}</span>
+      </div>
+      <div className={"text-white"}>
+        {FileIcons()[ext] ?? <span className="text-xl">{ext}</span>}
+      </div>
+    </div>
+  );
 }
 
 export default FileDetails;

@@ -1,16 +1,25 @@
-import React from 'react';
-import {Outlet} from "react-router";
+import React from "react";
+import { Outlet } from "react-router";
 import ErrorComponent from "@/AppComponent/ErrorComponent.jsx";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "./AppSideBar";
 
 function AppLayout() {
-    return (
-        <div className={"flex flex-col"}>
-            <ErrorComponent/>
-            {/*<div>Header</div>*/}
-            <Outlet/>
-            {/*<div>Footer</div>*/}
-        </div>
-    );
+  return (
+    <SidebarProvider
+      style={{
+        "--sidebar-width": "10rem",
+        "--sidebar-width-mobile": "10rem",
+      }}
+    >
+      <AppSidebar />
+      <main className="w-full">
+        <SidebarTrigger />
+        <ErrorComponent />
+        <Outlet />
+      </main>
+    </SidebarProvider>
+  );
 }
 
 export default AppLayout;
