@@ -1,0 +1,18 @@
+import {BrowserRouter, Navigate, Route, Routes} from "react-router";
+import AppLayout from "@/AppComponent/AppLayout.jsx";
+import ViewFiles from "@/AppComponent/ViewFiles.jsx";
+
+function App() {
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route element={<AppLayout/>}>
+                    <Route index element={<Navigate to={"/view-files"}/>}/>
+                    <Route path={"/view-files"} element={<ViewFiles/>}/>
+                </Route>
+            </Routes>
+        </BrowserRouter>
+    )
+}
+
+export default App
