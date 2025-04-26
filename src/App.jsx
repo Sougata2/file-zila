@@ -9,7 +9,7 @@ function App() {
       <Routes>
         <Route element={<AppLayout />}>
           <Route index element={<Navigate to={"/view-files"} />} />
-          <Route path={"/view-files"} element={<ViewFiles />} />
+          <Route path="/view-files" element={<ViewFiles />} />
           <Route path="/upload-file" element={<UploadFile />} />
         </Route>
       </Routes>
