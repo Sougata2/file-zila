@@ -12,7 +12,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog.jsx";
-import { Button } from "@/components/ui/button.jsx";
 import { FiDownloadCloud } from "react-icons/fi";
 
 function ViewFiles() {
