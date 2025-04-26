@@ -1,6 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import AppLayout from "@/AppComponent/AppLayout.jsx";
-import ViewFiles from "@/AppComponent/ViewFiles.jsx";
+import ViewFiles from "@/pages/ViewFiles.jsx";
 
 function App() {
   return (
