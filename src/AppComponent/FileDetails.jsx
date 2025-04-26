@@ -7,7 +7,12 @@ function FileDetails({ name, ext }) {
         <span>{name}</span>
       </div>
       <div className={"text-white"}>
-        {FileIcons()[ext] ?? <span className="text-xl">{ext}</span>}
+        {FileIcons()[ext] ?? (
+          <div className="flex items-center gap-2">
+            {FileIcons()["FILE"]}
+            <span className="text-sm text-black">{ext}</span>
+          </div>
+        )}
       </div>
     </div>
   );

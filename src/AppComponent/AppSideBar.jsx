@@ -20,7 +20,7 @@ import gdrive from "../assets/icons8-google-drive.svg";
 const items = [
   {
     title: "Upload",
-    url: "/upload",
+    url: "/upload-file",
     icon: FiUploadCloud,
   },
   {

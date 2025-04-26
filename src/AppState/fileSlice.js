@@ -86,14 +86,10 @@ export const uploadFile = createAsyncThunk(
       //   const state = thunkAPI.getState();
       const formData = new FormData();
       formData.append("file", file);
-      const response = await fetch(
-        import.meta.env.VITE_SERVER_URL + "/google/upload",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-      return response.json();
+      await fetch(import.meta.env.VITE_SERVER_URL + "/google/upload", {
+        method: "POST",
+        body: formData,
+      });
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

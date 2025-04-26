@@ -28,7 +28,7 @@ function ViewFiles() {
         "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 px-4 py-3 ms-5"
       }
     >
-      {files.map((file) => {
+      {files?.map((file) => {
         return (
           <Dialog key={file.id}>
             <DialogTrigger>
