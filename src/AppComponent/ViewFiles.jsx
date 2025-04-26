@@ -24,7 +24,11 @@ function ViewFiles() {
   }, [dispatch]);
 
   return (
-    <div className={"grid grid-cols-6 gap-3 px-4 py-3 ms-5"}>
+    <div
+      className={
+        "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 px-4 py-3 ms-5"
+      }
+    >
       {files.map((file) => {
         return (
           <Dialog key={file.id}>
@@ -54,14 +58,14 @@ function ViewFiles() {
                   />
                 </DialogDescription>
               </DialogHeader>
-              <DialogFooter className={"flex items-end"}>
+              <DialogFooter>
                 <DialogClose
                   className={
-                    "bg-blue-400 w-20 h-8 hover:bg-blue-500 text-white rounded-md flex justify-center items-center"
+                    "bg-blue-400 lg:w-20 w-full h-8 hover:bg-blue-500 text-white rounded-md flex justify-center items-center"
                   }
                   onClick={() => dispatch(downloadFile(file.id))}
                 >
-                  <FiDownloadCloud />
+                  <FiDownloadCloud size={20} />
                 </DialogClose>
               </DialogFooter>
             </DialogContent>
