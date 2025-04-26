@@ -9,6 +9,7 @@ import SuccessComponent from "./SuccessComponent";
 function AppLayout() {
   return (
     <SidebarProvider
+      defaultOpen={false}
       style={{
         "--sidebar-width": "10rem",
         "--sidebar-width-mobile": "5rem",
