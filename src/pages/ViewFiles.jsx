@@ -30,9 +30,9 @@ function ViewFiles() {
     >
       {files?.map((file) => {
         return (
-          <Dialog key={file.id}>
+          <Dialog key={file?.id}>
             <DialogTrigger>
-              <RectangleBox key={file.id} file={file} />
+              <RectangleBox key={file?.id} file={file} />
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
@@ -41,7 +41,7 @@ function ViewFiles() {
                     "overflow-hidden whitespace-nowrap text-ellipsis w-[150px] sm:w-[200px]"
                   }
                 >
-                  {file.name}
+                  {file?.name}
                 </DialogTitle>
                 <DialogDescription
                   className={"border shadow-md rounded-md overflow-hidden"}
@@ -49,7 +49,7 @@ function ViewFiles() {
                   <iframe
                     src={
                       import.meta.env.VITE_SERVER_URL +
-                      `/google/preview/${file.id}`
+                      `/google/preview/${file?.id}`
                     }
                     allow="autoplay"
                     height={"180rem"}
@@ -62,7 +62,7 @@ function ViewFiles() {
                   className={
                     "bg-blue-400 lg:w-20 w-full h-8 hover:bg-blue-500 text-white rounded-md flex justify-center items-center"
                   }
-                  onClick={() => dispatch(downloadFile(file.id))}
+                  onClick={() => dispatch(downloadFile(file?.id))}
                 >
                   <FiDownloadCloud size={20} />
                 </DialogClose>
