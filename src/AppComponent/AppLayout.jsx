@@ -3,6 +3,7 @@ import { Outlet } from "react-router";
 import ErrorComponent from "@/AppComponent/ErrorComponent.jsx";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "./AppSideBar";
+import Loader from "./Loader";
 
 function AppLayout() {
   return (
@@ -14,6 +15,7 @@ function AppLayout() {
     >
       <AppSidebar />
       <main className="w-full">
+        <Loader />
         <SidebarTrigger />
         <ErrorComponent />
         <Outlet />
