@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/sidebar";
 
 import gdrive from "../assets/icons8-google-drive.svg";
+import { useNavigate } from "react-router";
 
 // Menu items.
 const items = [
@@ -31,6 +32,7 @@ const items = [
 ];
 
 export function AppSidebar() {
+  const navigate = useNavigate();
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader className={"flex flex-row items-center-safe gap-2"}>
@@ -49,11 +51,11 @@ export function AppSidebar() {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                  <SidebarMenuButton asChild onClick={() => navigate(item.url)}>
+                    <div>
                       <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </div>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
