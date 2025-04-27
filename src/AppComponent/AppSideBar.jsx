@@ -26,7 +26,7 @@ const items = [
   },
   {
     title: "Download",
-    url: "/",
+    url: "/view-files",
     icon: FiDownloadCloud,
   },
 ];

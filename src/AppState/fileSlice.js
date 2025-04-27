@@ -70,7 +70,13 @@ export const fetchFiles = createAsyncThunk(
   "file/fetchFiles",
   async (arg, thunkAPI) => {
     try {
-      const response = await fetch(import.meta.env.VITE_SERVER_URL + "/google");
+      const response = await fetch(
+        import.meta.env.VITE_SERVER_URL + `/google`,
+        {
+          method: "GET",
+          credentials: "include",
+        }
+      );
       return await response.json();
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -88,6 +94,7 @@ export const uploadFile = createAsyncThunk(
       formData.append("file", file);
       await fetch(import.meta.env.VITE_SERVER_URL + "/google/upload", {
         method: "POST",
+        credentials: "include",
         body: formData,
       });
     } catch (error) {
@@ -101,24 +108,33 @@ export const downloadFile = createAsyncThunk(
   async (fileId, thunkAPI) => {
     try {
       const response = await fetch(
-        import.meta.env.VITE_SERVER_URL + `/google/download/${fileId}`
+        import.meta.env.VITE_SERVER_URL + `/google/download/${fileId}`,
+        {
+          method: "GET",
+          credentials: "include",
+        }
       );
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
 
-      // Try to extract filename from Content-Disposition header
-      const contentDisposition = response.headers.get("content-disposition");
-      const fileNameMatch = contentDisposition?.match(/filename="?(.+)"?/);
+      if (!response.ok) {
+        throw new Error("Failed to download the file");
+      }
+
+      const blob = await response.blob();
+
+      // Log the headers to see if filename is in the header
+      const contentDisposition = response.headers.get("Content-Disposition");
+
+      // const fileNameMatch = contentDisposition?.match(/filename="?(.+)"?/);
+      const fileNameMatch = contentDisposition.match(/filename="([^;]+)"/);
       const fileName = fileNameMatch?.[1] || "downloaded_file";
 
-      // Create a temporary link and trigger download
+      const url = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
       link.download = fileName;
       document.body.appendChild(link);
       link.click();
 
-      // Clean up
       link.remove();
       window.URL.revokeObjectURL(url);
     } catch (error) {
