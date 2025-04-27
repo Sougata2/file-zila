@@ -1,12 +1,19 @@
 import { Button } from "@/components/ui/button";
 import Cookies from "js-cookie";
 import React, { useEffect } from "react";
-import { useSearchParams } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 
 export default function GoogleLogin() {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
+    if (
+      Cookies.get("access_token") !== undefined ||
+      Cookies.get("refresh_token") !== undefined
+    )
+      return navigate("/view-files");
+
     if (searchParams.get("code")) {
       const auth_code = searchParams.get("code");
 
@@ -23,13 +30,19 @@ export default function GoogleLogin() {
         );
         if (response.ok) {
           const data = await response.json();
-          console.log(data);
-          Cookies.set("access_token", data.access_token);
-          Cookies.set("refresh_token", data.refresh_token);
+          // expiration time for 24 hours.
+          const expirationTime = 24 * 60 * 60;
+          Cookies.set("access_token", data.access_token, {
+            expires: expirationTime / 86400,
+          });
+          Cookies.set("refresh_token", data.refresh_token, {
+            expires: expirationTime / 86400,
+          });
+          navigate("/view-files");
         }
       })();
     }
-  }, [searchParams]);
+  }, [navigate, searchParams]);
 
   async function handleGoogleRequest() {
     const oauthUrl = `${import.meta.env.VITE_AUTH_URI}?client_id=${
@@ -47,12 +60,15 @@ export default function GoogleLogin() {
 
   return (
     <div className="flex w-full justify-center">
-      <Button
-        className={"bg-red-400 hover:bg-red-500"}
-        onClick={handleGoogleRequest}
-      >
-        Google
-      </Button>
+      <div className="flex flex-col gap-5 items-center">
+        <div className="text-2xl">Login</div>
+        <Button
+          className={"bg-red-400 hover:bg-red-500"}
+          onClick={handleGoogleRequest}
+        >
+          Google
+        </Button>
+      </div>
     </div>
   );
 }
