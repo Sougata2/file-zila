@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import Cookies from "js-cookie";
 
 const initialState = {
   files: [],
@@ -73,8 +74,14 @@ export const fetchFiles = createAsyncThunk(
       const response = await fetch(
         import.meta.env.VITE_SERVER_URL + `/google`,
         {
-          method: "GET",
-          credentials: "include",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            access_token: Cookies.get("access_token"),
+            refresh_token: Cookies.get("refresh_token"),
+          }),
         }
       );
       return await response.json();
