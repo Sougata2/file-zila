@@ -9,7 +9,7 @@ export default function GoogleLogin() {
 
   useEffect(() => {
     if (
-      Cookies.get("access_token") !== undefined ||
+      Cookies.get("access_token") !== undefined &&
       Cookies.get("refresh_token") !== undefined
     )
       return navigate("/view-files");
